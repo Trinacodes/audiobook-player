@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audiobook Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎧 Audiobook Player</h1>
+            <button id="darkModeToggle" class="dark-mode-btn">🌙 Dark Mode</button>
+        </div>
+        <p>Upload TXT, EPUB, or PDF files and they will read aloud</p>
+
+        <div class="upload-area" id="uploadArea">
+            <div>📁 Click or drag your book here</div>
+            <input type="file" id="fileInput" accept=".txt,.epub,.pdf">
+            <small>Supports TXT, EPUB, and PDF files</small>
+        </div>
+        <div style="display: flex; gap: 10px; margin: 10px 0;">
+    <button id="clearBooksBtn" style="background: #ff4444; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">🗑️ Clear All Books</button>
+    <button id="refreshBooksBtn" style="background: #2196F3; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">🔄 Refresh Page</button>
+</div>
+
+        <div id="loadingMessage" class="loading hidden">⏳ Processing book, please wait...</div>
+        
+        <div id="bookList" class="book-list"></div>
+
+        <div id="player" class="player hidden">
+            <div class="player-header">
+                <h3 id="bookTitle">No book selected</h3>
+                <button id="closePlayer" class="close-btn">✕</button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="controls">
+                <button id="backwardBtn" title="Back 10 seconds">⏪ 10s</button>
+                <button id="playBtn">▶ Play</button>
+                <button id="pauseBtn">⏸ Pause</button>
+                <button id="stopBtn">⏹ Stop</button>
+                <button id="forwardBtn" title="Forward 10 seconds">10s ⏩</button>
+            </div>
+            <div class="speed-control">
+                <span>Speed:</span>
+                <button class="speed-btn" data-speed="0.5">0.5x</button>
+                <button class="speed-btn" data-speed="0.75">0.75x</button>
+                <button class="speed-btn" data-speed="1" id="defaultSpeed">1x</button>
+                <button class="speed-btn" data-speed="1.25">1.25x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2">2x</button>
+            </div>
+            <div class="voice-control">
+                <span>Voice:</span>
+                <button id="voiceMaleBtn" class="voice-btn active">👨 Male</button>
+                <button id="voiceFemaleBtn" class="voice-btn">👩 Female</button>
+            </div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
