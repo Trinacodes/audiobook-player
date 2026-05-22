@@ -327,6 +327,18 @@ body.dark-mode .voice-btn {
     transform: scale(1.05);
 }
 
+.volume-control {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    align-items: center;
+}
+
+.volume-control input {
+    width: 150px;
+    cursor: pointer;
+}
 
 .progress-text {
     text-align: center;
