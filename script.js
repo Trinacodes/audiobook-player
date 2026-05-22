@@ -813,6 +813,36 @@ document.addEventListener('DOMContentLoaded', function() {
     
     loadBooks();
     loadVoices();
+    // Add this to your script.js
+let wakeLock = null;
+
+async function requestWakeLock() {
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+            console.log('Screen wake lock acquired');
+            
+            // Re-acquire if page becomes visible again
+            document.addEventListener('visibilitychange', async () => {
+                if (wakeLock !== null && document.visibilityState === 'visible') {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            });
+        } else {
+            // Fallback for older browsers
+            alert('Your browser cannot prevent screen sleep.\n\nFor background playback, please use:\n- Android: @Voice Aloud Reader\n- iPhone: Voice Dream Reader');
+        }
+    } catch (err) {
+        console.error('Wake lock failed:', err);
+    }
+}
+
+// Add a button to request screen wake lock
+const wakeLockBtn = document.createElement('button');
+wakeLockBtn.textContent = '🔆 Keep Screen On';
+wakeLockBtn.onclick = requestWakeLock;
+wakeLockBtn.style.cssText = 'background:#4CAF50;color:white;border:none;padding:8px 16px;border-radius:8px;margin:10px;cursor:pointer;';
+document.querySelector('.container').prepend(wakeLockBtn);
     
     // Load last played book if exists
     const lastBookId = localStorage.getItem('last_book_id');
