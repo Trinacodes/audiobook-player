@@ -53,6 +53,12 @@
                 <button class="speed-btn" data-speed="1.5">1.5x</button>
                 <button class="speed-btn" data-speed="2">2x</button>
             </div>
+            <!-- Add this inside the player div, after speed-control -->
+<div class="volume-control">
+    <span>🔊 Volume:</span>
+    <input type="range" id="volumeSlider" min="0" max="100" value="100">
+    <span id="volumeValue">100%</span>
+</div>
             <div class="voice-control">
                 <span>Voice:</span>
                 <button id="voiceMaleBtn" class="voice-btn active">👨 Male</button>
